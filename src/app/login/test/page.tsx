@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 const TestPage: React.FC = () => {
@@ -5,6 +6,9 @@ const TestPage: React.FC = () => {
         <div>
             <h1>Test Page</h1>
             <p>This is a placeholder for the test page.</p>
+            <Link href="/login/12">
+                Login 1
+            </Link>
         </div>
     );
 };

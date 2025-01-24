@@ -1,19 +1,35 @@
-import React from 'react';
+'use client';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 
 type Props = {
-    params: {
+    params: Promise<{
         loginId: string
-    };
+    }>;
 }
 
 const LoginId: React.FC<Props> = ({
     params,
 }) => {
+    const router = useRouter();
+    const [loginId, setLoginId] = useState<string | null>(null);
+
+    useEffect(() => {
+        params.then(resolvedParams => {
+            setLoginId(resolvedParams.loginId);
+        });
+    }, [params]);
+
+    const handleClick = () => {
+        console.log("Vous avez cliquez sur le lien");
+    };
+
     return (
         <div>
             <h1>Test Page</h1>
-            <p>This is a placeholder for the test page.</p>
-            <p>Login Id: {params.loginId}</p>
+            <p>Page avec lien dynamique</p>
+            <p>Login Id: {loginId}</p>
+            <button onClick={() => handleClick()}>Cliquez ici</button>
         </div>
     );
 };
